@@ -28,7 +28,7 @@ router.post('/register',
                 return res.status(400).json({ message: "User already exists!" })
             }
 
-            user = new User(req.body)
+            user = new User(req.body);
             await user.save();
 
             const token = jwt.sign(

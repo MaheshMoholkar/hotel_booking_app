@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import * as apiClient from "../api-client";
+import { useAppContext } from "../contexts/AppContext";
+import { useNavigate } from "react-router-dom";
 
 export type RegisterFormData = {
   firstName: string;
@@ -11,6 +13,8 @@ export type RegisterFormData = {
 };
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { showToast } = useAppContext();
   const {
     register,
     watch,
@@ -18,13 +22,14 @@ const Register = () => {
     formState: { errors },
   } = useForm<RegisterFormData>();
 
-  const mutation = useMutation(apiClient.register,{
+  const mutation = useMutation(apiClient.register, {
     onSuccess: () => {
-      console.log("Successful")
+      showToast({ message: "Registration Success!", type: "SUCCESS" });
+      navigate("/");
     },
-    onError: (error: Error)=>{
-      console.error(error.message)
-    }
+    onError: (error: Error) => {
+      showToast({ message: error.message, type: "ERROR" });
+    },
   });
 
   const onSubmit = handleSubmit((data) => {
@@ -64,8 +69,8 @@ const Register = () => {
           {...register("email", { required: "This field is required" })}
         ></input>
         {errors.email && (
-            <span className="text-red-500">{errors.email.message}</span>
-          )}
+          <span className="text-red-500">{errors.email.message}</span>
+        )}
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
         Password
@@ -81,8 +86,8 @@ const Register = () => {
           })}
         ></input>
         {errors.password && (
-            <span className="text-red-500">{errors.password.message}</span>
-          )}
+          <span className="text-red-500">{errors.password.message}</span>
+        )}
       </label>
       <label className="text-gray-700 text-sm font-bold flex-1">
         Confirm Password
@@ -100,8 +105,8 @@ const Register = () => {
           })}
         ></input>
         {errors.confirmPassword && (
-            <span className="text-red-500">{errors.confirmPassword.message}</span>
-          )}
+          <span className="text-red-500">{errors.confirmPassword.message}</span>
+        )}
       </label>
       <span>
         <button
