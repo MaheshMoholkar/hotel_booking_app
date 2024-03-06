@@ -14,7 +14,7 @@ router.post("/login", [
     async (req: Request, res: Response) => {
         const errors = validationResult(req)
         if (!errors.isEmpty()) {
-            return res.send(400).json({ message: errors.array() })
+            return res.sendStatus(400).json({ message: errors.array() })
         }
 
         const { email, password } = req.body;
@@ -48,8 +48,8 @@ router.post("/login", [
         }
     })
 
-router.get("/validate-token", verifyToken, (req: Request, res: Response) =>{
-    res.status(200).send({userId: req.userId})
+router.get("/validate-token", verifyToken, (req: Request, res: Response) => {
+    res.status(200).send({ userId: req.userId })
 })
 
 export default router;
