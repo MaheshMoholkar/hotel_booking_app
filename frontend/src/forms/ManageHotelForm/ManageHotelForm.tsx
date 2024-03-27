@@ -24,9 +24,14 @@ const ManageHotelForm = () => {
 
   const { handleSubmit } = formMethods;
 
+  const onSubmit = handleSubmit((formData: HotelFormData) => {
+    // Save Form
+    console.log(formData);
+  });
+
   return (
     <FormProvider {...formMethods}>
-      <form className="flex flex-col gap-10">
+      <form className="flex flex-col gap-10" onSubmit={onSubmit}>
         <DetailsSection />
         <TypeSection />
         <FacilitiesSection />
