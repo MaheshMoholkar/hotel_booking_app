@@ -14,7 +14,7 @@ const DetailsSection = () => {
         Name
         <input
           type="email"
-          className="border rounder w-full py-1 px-2 font-normal"
+          className="border rounded w-full py-1 px-2 font-normal"
           {...register("name", { required: "This field is required" })}
         ></input>
         {errors.name && (
@@ -26,7 +26,7 @@ const DetailsSection = () => {
           City
           <input
             type="email"
-            className="border rounder w-full py-1 px-2 font-normal"
+            className="border rounded w-full py-1 px-2 font-normal"
             {...register("city", { required: "This field is required" })}
           ></input>
           {errors.city && (
@@ -37,7 +37,7 @@ const DetailsSection = () => {
           Country
           <input
             type="email"
-            className="border rounder w-full py-1 px-2 font-normal"
+            className="border rounded w-full py-1 px-2 font-normal"
             {...register("country", { required: "This field is required" })}
           ></input>
           {errors.country && (
@@ -49,7 +49,7 @@ const DetailsSection = () => {
         Description
         <textarea
           rows={10}
-          className="border rounder w-full py-1 px-2 font-normal"
+          className="border rounded w-full py-1 px-2 font-normal"
           {...register("description", { required: "This field is required" })}
         ></textarea>
         {errors.description && (
@@ -60,7 +60,7 @@ const DetailsSection = () => {
         Price Per Night
         <input
           type="number"
-          className="border rounder w-full py-1 px-2 font-normal"
+          className="border rounded w-full py-1 px-2 font-normal"
           {...register("pricePerNight", { required: "This field is required" })}
         ></input>
         {errors.pricePerNight && (

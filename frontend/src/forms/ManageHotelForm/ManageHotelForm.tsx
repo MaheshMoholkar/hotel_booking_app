@@ -2,6 +2,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import DetailsSection from "./DetailsSection";
 import TypeSection from "./TypeSection";
 import FacilitiesSection from "./FacilitiesSection";
+import GuestSection from "./GuestSection";
+import ImagesSection from "./ImagesSection";
 
 export type HotelFormData = {
   name: string;
@@ -20,12 +22,24 @@ export type HotelFormData = {
 const ManageHotelForm = () => {
   const formMethods = useForm<HotelFormData>();
 
+  const { handleSubmit } = formMethods;
+
   return (
     <FormProvider {...formMethods}>
       <form className="flex flex-col gap-10">
         <DetailsSection />
         <TypeSection />
         <FacilitiesSection />
+        <GuestSection />
+        <ImagesSection />
+        <span className="flex justify-end">
+          <button
+            type="submit"
+            className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl"
+          >
+            Save
+          </button>
+        </span>
       </form>
     </FormProvider>
   );
