@@ -11,7 +11,7 @@ const storage = multer.memoryStorage();
 const upload = multer({
     storage: storage,
     limits: {
-        fileSize: 5 * 1024 // 5MB
+        fileSize: 5 * 1024 * 1024 // 5MB
     }
 })
 
@@ -24,6 +24,7 @@ router.post("/", verifyToken, [
     body("type").notEmpty().withMessage("Hotel type is required"),
     body("pricePerNight").notEmpty().isNumeric().withMessage("Price per night is required and must be a number"),
     body("facilites").notEmpty().isArray().withMessage("Facilites are required"),
+
 ],
     upload.array("imageFiles", 6),
     async (req: Request, res: Response) => {
@@ -33,7 +34,7 @@ router.post("/", verifyToken, [
 
             // upload the images to cloudinary
             const uploadPromises = imageFiles.map(async (image) => {
-                const b64 = Buffer.from(image.buffer);
+                const b64 = Buffer.from(image.buffer).toString("base64");
                 let dataURI = "data:" + image.mimetype + ";base64," + b64;
                 const res = await cloudinary.v2.uploader.upload(dataURI);
                 return res.url;
