@@ -79,7 +79,7 @@ router.put("/:hotelId", verifyToken, upload.array("imageFiles"), async (req: Req
         updatedHotel.lastUpdated = new Date()
 
         const hotel = await Hotel.findOneAndUpdate({
-            _id: req.params.hoteId,
+            _id: req.params.hotelId,
             userId: req.userId
         }, updatedHotel, { new: true })
 
@@ -93,7 +93,7 @@ router.put("/:hotelId", verifyToken, upload.array("imageFiles"), async (req: Req
         hotel.imageUrls = [...updatedImageUrls, ...(updatedHotel.imageUrls || [])]
 
         await hotel.save()
-        res.json(201).json(hotel)
+        res.status(201).json(hotel)
     } catch (error) {
         res.status(500).json({ message: "Something went wrong!" })
     }
