@@ -40,7 +40,7 @@ const Search = () => {
           {/* sort todo */}
         </div>
         {hotelData?.data.map((hotel) => (
-          <SearchResultsCard hotel={hotel} />
+          <SearchResultsCard hotel={hotel} key={hotel._id} />
         ))}
         <div>
           <Pagination
